@@ -1,5 +1,6 @@
 package com.twoguysonepanda.itfest2018.controller;
 
+import com.twoguysonepanda.itfest2018.entities.User;
 import com.twoguysonepanda.itfest2018.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -34,5 +36,14 @@ public class UserController {
             @RequestBody() MultipartFile analyse
     ) throws IOException {
         return userService.addAnalyse(email, donationDate, analyse.getBytes());
+    }
+
+
+
+    @GetMapping(path = "/donors")
+    public @ResponseBody
+    List<User> donors ()
+    {
+        return userService.donors();
     }
 }
