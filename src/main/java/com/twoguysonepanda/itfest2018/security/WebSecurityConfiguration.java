@@ -68,18 +68,18 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/dummy").authenticated()
-                .antMatchers(HttpMethod.POST,"/login").permitAll()
-                .antMatchers(HttpMethod.POST,"/register").permitAll()
-                .antMatchers(HttpMethod.POST,"/recommend").hasAuthority(UserType.USER.name())
+//                .antMatchers(HttpMethod.GET,"/dummy").authenticated()
+//                .antMatchers(HttpMethod.POST,"/login").permitAll()
+//                .antMatchers(HttpMethod.POST,"/register").permitAll()
+//                .antMatchers(HttpMethod.POST,"/recommend").hasAuthority(UserType.USER.name())
 
 
 ////                 this should be set later, only for testing
-//                    .antMatchers(HttpMethod.GET, "/**").permitAll()
-//                    .antMatchers(HttpMethod.POST, "/**").permitAll()
-//                    .antMatchers(HttpMethod.PUT, "/**").permitAll()
-//                    .antMatchers(HttpMethod.PATCH, "/**").permitAll()
-//                    .antMatchers(HttpMethod.DELETE, "/**").permitAll()
+                    .antMatchers(HttpMethod.GET, "/**").permitAll()
+                    .antMatchers(HttpMethod.POST, "/**").permitAll()
+                    .antMatchers(HttpMethod.PUT, "/**").permitAll()
+                    .antMatchers(HttpMethod.PATCH, "/**").permitAll()
+                    .antMatchers(HttpMethod.DELETE, "/**").permitAll()
                 .and()
                 .logout().permitAll();
 

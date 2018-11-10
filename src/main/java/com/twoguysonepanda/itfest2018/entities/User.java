@@ -2,6 +2,7 @@ package com.twoguysonepanda.itfest2018.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.twoguysonepanda.itfest2018.entities.enums.UserType;
 
 import javax.persistence.*;
@@ -46,6 +47,12 @@ public class  User {
     @Column(name="current_login_date")
     private Date currentLoginDate;
 
+    @Lob
+    private byte[] analyse;
+
+    @OneToOne(mappedBy = "user")
+    private Reservation reservation;
+
     public Long getId() {
         return id;
     }
@@ -53,6 +60,11 @@ public class  User {
     public void setId(Long id) {
         this.id = id;
     }
+
+    private Date lastDonationDate;
+
+    private Date nextDonationDate;
+
 
     public String getUsername() {
         return username;
@@ -130,5 +142,37 @@ public class  User {
         this.lastPasswordResetDate = lastPasswordResetDate;
         this.lastLoginDate = lastLoginDate;
         this.currentLoginDate = currentLoginDate;
+    }
+
+    public byte[] getAnalyse() {
+        return analyse;
+    }
+
+    public void setAnalyse(byte[] analyse) {
+        this.analyse = analyse;
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
+
+    public Date getLastDonationDate() {
+        return lastDonationDate;
+    }
+
+    public void setLastDonationDate(Date lastDonationDate) {
+        this.lastDonationDate = lastDonationDate;
+    }
+
+    public Date getNextDonationDate() {
+        return nextDonationDate;
+    }
+
+    public void setNextDonationDate(Date nextDonationDate) {
+        this.nextDonationDate = nextDonationDate;
     }
 }
