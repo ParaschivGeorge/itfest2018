@@ -53,4 +53,8 @@ public class UserService {
     public List<User> donors() {
         return this.userRepository.findAllByType(UserType.DONOR);
     }
+
+    public byte[] analyse(String email) {
+        return this.userRepository.findByEmail(email).getAnalyse();
+    }
 }
