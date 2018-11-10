@@ -1,1 +1,1 @@
-web: java -jar target/starter-0.0.1-SNAPSHOT.jar
+web: java -jar target/itfest2018-0.0.1-SNAPSHOT.jar
