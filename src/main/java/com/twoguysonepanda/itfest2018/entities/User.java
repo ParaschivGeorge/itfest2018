@@ -1,6 +1,7 @@
 package com.twoguysonepanda.itfest2018.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.twoguysonepanda.itfest2018.entities.enums.UserType;
@@ -50,6 +51,7 @@ public class  User {
     @Lob
     private byte[] analyse;
 
+    @JsonBackReference
     @OneToOne(mappedBy = "user")
     private Reservation reservation;
 
