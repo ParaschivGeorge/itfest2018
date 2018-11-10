@@ -15,5 +15,6 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "reservation", path = "reservation")
 public interface ReservationRepository extends CrudRepository<Reservation, Long>, JpaSpecificationExecutor<Reservation> {
     List<Reservation> findByUser(User user);
+    List<Reservation> findByUserEmail(@Param("email")String email);
     List<Reservation> findByDate(@Param("date") Date date);
 }
