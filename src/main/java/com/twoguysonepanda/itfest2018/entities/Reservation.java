@@ -16,6 +16,7 @@ public class Reservation {
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
     private Date date;
 
     private Long time;
