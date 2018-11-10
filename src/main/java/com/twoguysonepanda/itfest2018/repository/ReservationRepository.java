@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -16,5 +17,5 @@ import java.util.List;
 public interface ReservationRepository extends CrudRepository<Reservation, Long>, JpaSpecificationExecutor<Reservation> {
     List<Reservation> findByUser(User user);
     List<Reservation> findByUserEmail(@Param("email")String email);
-    List<Reservation> findByDate(@Param("date") Date date);
+    List<Reservation> findByDate(@Param("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date);
 }
