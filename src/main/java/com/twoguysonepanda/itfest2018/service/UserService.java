@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -47,5 +48,9 @@ public class UserService {
         userRepository.save(user);
 
         return true;
+    }
+
+    public List<User> donors() {
+        return this.userRepository.findAllByType(UserType.DONOR);
     }
 }
