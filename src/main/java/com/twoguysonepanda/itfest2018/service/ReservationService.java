@@ -23,6 +23,9 @@ public class ReservationService {
 
     public Reservation add(String email, Date date, Long time) {
         User user = userRepository.findByEmail(email);
+        if (user.getReservation() != null) {
+            return user.getReservation();
+        }
         System.out.println("here");
         return reservationRepository.save(new Reservation(user, date, time));
     }
