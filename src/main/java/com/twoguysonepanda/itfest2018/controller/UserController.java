@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -45,5 +46,14 @@ public class UserController {
     List<User> donors ()
     {
         return userService.donors();
+    }
+
+    @GetMapping(path = "/analyse")
+    public @ResponseBody
+    byte[] analyse (@RequestParam(required = true) String email, HttpServletResponse response)
+    {
+        response.setHeader("Content-Type", "application/pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=sample.pdf");
+        return userService.analyse(email);
     }
 }
