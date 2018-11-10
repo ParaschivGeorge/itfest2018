@@ -1,6 +1,8 @@
 package com.twoguysonepanda.itfest2018.security.controller;
 
+import com.twoguysonepanda.itfest2018.entities.User;
 import com.twoguysonepanda.itfest2018.projections.UserRegister;
+import com.twoguysonepanda.itfest2018.repository.UserRepository;
 import com.twoguysonepanda.itfest2018.security.JwtAuthenticationRequest;
 import com.twoguysonepanda.itfest2018.security.JwtTokenUtil;
 import com.twoguysonepanda.itfest2018.security.JwtUser;
@@ -41,6 +43,9 @@ public class AuthenticationRestController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
 
@@ -49,9 +54,9 @@ public class AuthenticationRestController {
         // Reload password post-security so we can generate the token
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
         final String token = jwtTokenUtil.generateToken(userDetails);
-
+        final User user = userRepository.findByEmail(authenticationRequest.getEmail());
         // Return the token
-        return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+        return ResponseEntity.ok(new JwtAuthenticationResponse(token, user));
     }
 
     @RequestMapping(value = "${jwt.route.authentication.refresh}", method = RequestMethod.GET)
@@ -63,7 +68,8 @@ public class AuthenticationRestController {
 
         if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
             String refreshedToken = jwtTokenUtil.refreshToken(token);
-            return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
+            User user1 = userRepository.findByEmail(username);
+            return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken, user1));
         } else {
             return ResponseEntity.badRequest().body(null);
         }

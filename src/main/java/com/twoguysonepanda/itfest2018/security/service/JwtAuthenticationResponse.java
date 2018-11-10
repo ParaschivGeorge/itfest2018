@@ -1,5 +1,7 @@
 package com.twoguysonepanda.itfest2018.security.service;
 
+import com.twoguysonepanda.itfest2018.entities.User;
+
 import java.io.Serializable;
 
 public class JwtAuthenticationResponse implements Serializable {
@@ -8,11 +10,18 @@ public class JwtAuthenticationResponse implements Serializable {
 
     private final String token;
 
-    public JwtAuthenticationResponse(String token) {
+    private final User user;
+
+    public JwtAuthenticationResponse(String token, User user) {
         this.token = token;
+        this.user = user;
     }
 
     public String getToken() {
         return this.token;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

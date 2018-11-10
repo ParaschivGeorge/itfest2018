@@ -4,6 +4,7 @@ public class UserRegister {
     String email;
     String username;
     String password;
+    Boolean isMedic;
 
     public String getEmail() {
         return email;
@@ -27,5 +28,13 @@ public class UserRegister {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getMedic() {
+        return isMedic;
+    }
+
+    public void setMedic(Boolean medic) {
+        isMedic = medic;
     }
 }
