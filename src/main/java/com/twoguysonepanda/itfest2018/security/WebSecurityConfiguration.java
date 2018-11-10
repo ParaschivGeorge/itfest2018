@@ -69,17 +69,32 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
 //                .antMatchers(HttpMethod.GET,"/dummy").authenticated()
-//                .antMatchers(HttpMethod.POST,"/login").permitAll()
-//                .antMatchers(HttpMethod.POST,"/register").permitAll()
+                .antMatchers(HttpMethod.POST,"/login").permitAll()
+                .antMatchers(HttpMethod.POST,"/register").permitAll()
+
+                .antMatchers(HttpMethod.GET, "/user/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/user/**").authenticated()
+                .antMatchers(HttpMethod.PUT, "/user/**").authenticated()
+                .antMatchers(HttpMethod.PATCH, "/user/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/user/**").authenticated()
+                .antMatchers(HttpMethod.OPTIONS, "/user/**").authenticated()
+
+                .antMatchers(HttpMethod.GET, "/reservation/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/reservation/**").authenticated()
+                .antMatchers(HttpMethod.PUT, "/reservation/**").authenticated()
+                .antMatchers(HttpMethod.PATCH, "/reservation/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/reservation/**").authenticated()
+                .antMatchers(HttpMethod.OPTIONS, "/reservation/**").authenticated()
+
 //                .antMatchers(HttpMethod.POST,"/recommend").hasAuthority(UserType.USER.name())
 
 
 ////                 this should be set later, only for testing
-                    .antMatchers(HttpMethod.GET, "/**").permitAll()
-                    .antMatchers(HttpMethod.POST, "/**").permitAll()
-                    .antMatchers(HttpMethod.PUT, "/**").permitAll()
-                    .antMatchers(HttpMethod.PATCH, "/**").permitAll()
-                    .antMatchers(HttpMethod.DELETE, "/**").permitAll()
+//                    .antMatchers(HttpMethod.GET, "/**").permitAll()
+//                    .antMatchers(HttpMethod.POST, "/**").permitAll()
+//                    .antMatchers(HttpMethod.PUT, "/**").permitAll()
+//                    .antMatchers(HttpMethod.PATCH, "/**").permitAll()
+//                    .antMatchers(HttpMethod.DELETE, "/**").permitAll()
                 .and()
                 .logout().permitAll();
 
